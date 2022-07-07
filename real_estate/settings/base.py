@@ -2,18 +2,18 @@ import environ # Optionally import and use os instead
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Define variable to access dev environment with default value
-envy = environ.Env(DEBUG = (bool, False))
+envr = environ.Env(DEBUG = (bool, False))
 
 # Read environment variables defined in .env file in base directory
 # Note .env file doesn't contain space betw each variable name and its value
 environ.Env.read_env(BASE_DIR / ".env")
 
-SECRET_KEY = envy("SECRET_KEY")
-DEBUG = envy("DEBUG")
-ALLOWED_HOSTS = envy("ALLOWED_HOSTS").split(" ")
+SECRET_KEY = envr("SECRET_KEY")
+DEBUG = envr("DEBUG")
+ALLOWED_HOSTS = envr("ALLOWED_HOSTS").split(" ")
 
 # Application definition
 # Note default INSTALLED_APPS is changed to DJANGO_APPS here
@@ -83,13 +83,6 @@ WSGI_APPLICATION = 'real_estate.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -127,9 +120,62 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
+STAIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIR = []
+
+MEDIA_URL = "/mediafiles/"
+MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configure django loggin for debugging - loggers, handlers, filters & formatters
+# Create a dir named logs and the files referenced will be automatically created inside
+import logging
+import logging.config
+from django.utils.log import DEFAULT_LOGGING
+
+logger = logging.getLogger(__name__)
+
+LOG_LEVEL = "INFO"
+
+logging.config.dictConfig({
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "console": {
+            "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s",
+        },
+        "file": {"format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s"},
+        "django.server": DEFAULT_LOGGING["formatters"]["django.server"],
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "console",  
+        },
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "formatter": "file",
+            "filename": "logs/real_estate.log",
+        },
+        "django.server": DEFAULT_LOGGING["handlers"]["django.server"],
+    },
+    "loggers": {
+        "": {
+            "level": "INFO",
+            "handlers": ["console", "file"],
+            "propagate": False
+        },
+        "apps": {
+            "level": "INFO",
+            "handlers": ["console"],
+            "propagate": False
+        },
+        "django.server": DEFAULT_LOGGING["loggers"]["django.server"],
+    }
+})
