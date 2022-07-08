@@ -11,6 +11,7 @@ envr = environ.Env(DEBUG = (bool, False))
 # Note .env file doesn't contain space betw each variable name and its value
 environ.Env.read_env(BASE_DIR / ".env")
 
+# Use the created variable to access hidden parameters in dev environment
 SECRET_KEY = envr("SECRET_KEY")
 DEBUG = envr("DEBUG")
 ALLOWED_HOSTS = envr("ALLOWED_HOSTS").split(" ")
@@ -131,6 +132,9 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# State where custom user model is located
+AUTH_USER_MODEL = "users.User"
 
 # Configure django loggin for debugging - loggers, handlers, filters & formatters
 # Create a dir named logs and the files referenced will be automatically created inside
