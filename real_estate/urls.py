@@ -6,6 +6,12 @@ from django.conf.urls.static import static
 # Create urls for apps, first is site admin login url
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("api/v1/auth/", include("djoser.urls")),
+    path("api/v1/auth/", include("djoser.urls.jwt")),
+    # path("api/v1/profile/", include("apps.profiles.urls")),
+    # path("api/v1/properties/", include("apps.properties.urls")),
+    # path("api/v1/ratings/", include("apps.ratings.urls")),
+    # path("api/v1/enquiries/", include("apps.enquiries.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
