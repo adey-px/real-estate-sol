@@ -38,6 +38,8 @@ LOCAL_APPS = [
     "apps.profiles",
     "apps.ratings",
     "apps.users",
+    "apps.enquiries",
+    "apps.properties",
 ]
 
 # Manually added as packages listed in requirements.txt
