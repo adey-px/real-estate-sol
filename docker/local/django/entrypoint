@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# If any code fails, the entire shell script fails
+set -o errexit
+
+# Fail exit if any code command fails
+set -o pipefail
+
+# This will exit if any variable if not set
+set -o nounset
+
+# Declare postgre and try connect to db
+postgres_ready() {
+python << END
+import sys
+import psycopg2
+try:
+    psycopg2.connect(
+        dbname="${POSTGRES_DB}",
+        user="${POSTGRES_USER}",
+        password="${POSTGRES_PASSWORD}",
+        host="${PG_HOST}",
+        port="${PG_PORT}",
+    )
+except psycopg2.OperationalError:
+    sys.exit(-1)
+sys.exit(0)
+END
+}
+
+until postgres_ready; do
+ >&2 echo "Waiting for PostgreSQL to become available....:-("
+ sleep 1
+done
+>&2 echo "PostgreSQL is ready!!!!...:-)"
+
+exec "$@"

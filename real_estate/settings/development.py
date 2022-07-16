@@ -17,9 +17,9 @@ SITE_NAME = "Real Estate"
 DATABASES = {
     "default": {
         "ENGINE": envr("PG_ENGINE"),
-        "NAME": envr("PG_NAME"),
-        "USER": envr("PG_USER"),
-        "PASSWORD": envr("PG_PASSWORD"),
+        "NAME": envr("POSTGRES_DB"),
+        "USER": envr("POSTGRES_USER"),
+        "PASSWORD": envr("POSTGRES_PASSWORD"),
         "HOST": envr("PG_HOST"),
         "PORT": envr("PG_PORT"),
     }
