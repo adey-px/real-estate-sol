@@ -7,7 +7,9 @@ from apps.profiles.models import Profile
 
 from .models import Rating
 
+
 User = get_user_model()
+
 
 # create agent review
 @api_view(["POST"])

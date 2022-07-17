@@ -7,7 +7,9 @@ from phonenumber_field.modelfields import PhoneNumberField
 # Import model from commom app
 from apps.commom.models import TimeStampedUUIDModel
 
+
 User = get_user_model()
+
 
 # Define gender model with 3 fields
 class Gender(models.TextChoices):
@@ -67,4 +69,4 @@ class Profile(TimeStampedUUIDModel):
     )
 
     def __str__(self):
-        return f"{self.user.username}'s profile" 
+        return f"{self.user.username}'s profile"

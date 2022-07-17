@@ -13,10 +13,11 @@ from rest_framework.views import APIView
 from .exceptions import PropertyNotFound
 from .models import Property, PropertyViews
 from .pagination import PropertyPagination
-from .serializers import (PropertyCreateSerializer, 
+from .serializers import (PropertyCreateSerializer,
                           PropertySerializer,
                           PropertyViewSerializer
                           )
+
 
 logger = logging.getLogger(__name__)
 

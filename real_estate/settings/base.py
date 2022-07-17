@@ -1,8 +1,13 @@
 from datetime import timedelta
-import environ # Optionally import and use os instead
+import environ
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+import logging
+import logging.config
+from django.utils.log import DEFAULT_LOGGING
+
+
+# Build paths inside the project
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Define variable to access dev environment with default value
@@ -26,7 +31,7 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites', # This line is manually added
+    'django.contrib.sites',  # This line is manually added
 ]
 
 # Also manually added
@@ -157,7 +162,7 @@ SIMPLE_JWT = {
 }
 
 DJOSER = {
-    "LOGIN_FIELD": "email", # To be used by user model as login field
+    "LOGIN_FIELD": "email",  # To be used by user model as login field
     "USER_CREATE_PASSWORD_RETYPE": True,
     "USERNAME_CHANGED_EMAIL_CONFIRMATION": True,
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
@@ -178,10 +183,6 @@ DJOSER = {
 
 # Configure django loggin for debugging - loggers, handlers, filters & formatters
 # Create a dir named logs and the files referenced will be automatically created inside
-import logging
-import logging.config
-from django.utils.log import DEFAULT_LOGGING
-
 logger = logging.getLogger(__name__)
 
 LOG_LEVEL = "INFO"
@@ -199,7 +200,7 @@ logging.config.dictConfig({
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
-            "formatter": "console",  
+            "formatter": "console",
         },
         "file": {
             "level": "INFO",

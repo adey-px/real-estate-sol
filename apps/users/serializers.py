@@ -48,6 +48,7 @@ class UserSerializer(serializers.ModelSerializer):
             representation["admin"] = True
         return representation
 
+
 # Define create-user-serializer
 class CreateUserSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
