@@ -2,7 +2,7 @@ from .base import *
 
 
 # Configure smtp server by mailtrap
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
 EMAIL_HOST = envr("EMAIL_HOST")
 EMAIL_USE_TLS = True
 EMAIL_PORT = envr("EMAIL_PORT")
@@ -24,3 +24,8 @@ DATABASES = {
         "PORT": envr("PG_PORT"),
     }
 }
+
+# Bring in celery settings from environ
+CELERY_BROKER_URL = envr("CELERY_BROKER")
+CELERY_RESULT_BACKEND = envr("CELERY_BACKEND")
+CELERY_TIMEZONE = "UTC"
