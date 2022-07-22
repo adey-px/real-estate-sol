@@ -1,6 +1,7 @@
-import { combineReducers } from "redux";
-import { propertyListReducer } from "./propertyReducers";
+import { combineReducers } from 'redux';
+import { propertiesListReducer } from './propertyReducers';
+
 
 export default combineReducers({
-    propertiesList: propertyListReducer,
+    propertiesList: propertiesListReducer,
 });

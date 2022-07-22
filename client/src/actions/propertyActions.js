@@ -6,23 +6,23 @@ import {
     } from './types';
 
 
-export const listProperties = () => async (dispatch)=>{
+
+export const listProperties = () => async (dispatch) => {
     try {
         dispatch({
-            type: PROPERTY_LIST_REQUEST
+            type: PROPERTY_LIST_REQUEST,
         })
-        const {data} = await axios.get("/api/v1/properties/all")
+        const {data} = await axios.get("/api/v1/properties/all/");
 
         dispatch({
             type: PROPERTY_LIST_SUCCESS,
-            payload: data
-        })
+            payload: data,
+        });
     } catch (error) {
         dispatch({
             type: PROPERTY_LIST_FAIL,
-            Payload: error.response && error.response.data.message 
-                ? error.response.data.message: error.message
-        })
+            Payload: error.response && error.response.data.message ? error.response.data.message: error.message,
+        });
 
     }
-}
+};
