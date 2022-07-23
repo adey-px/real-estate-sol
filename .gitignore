@@ -1,3 +1,10 @@
+.VSCode
+.idea
+.DS_STore
+staticfiles
+mediafiles
+client/node_modules
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -24,6 +31,7 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
 MANIFEST
 
 # PyInstaller
@@ -40,6 +48,7 @@ pip-delete-this-directory.txt
 htmlcov/
 .tox/
 .nox/
+.coverage*
 .coverage
 .coverage.*
 .cache
